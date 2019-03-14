@@ -10,7 +10,7 @@ import UIKit
 
 class ToDoListViewController: UITableViewController {
     
-    let itemArray = ["Do this", "Do that", "Do it"]
+    var itemArray = ["Do this", "Do that", "Do it"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,27 @@ class ToDoListViewController: UITableViewController {
     }
     
     
-
+    @IBAction func AddToDoItem(_ sender: UIBarButtonItem) {
+        
+        var newItem = UITextField()
+        
+        let alert = UIAlertController(title: "Add new Todoey Item", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add item", style: .default) { (action) in
+            self.itemArray.append(newItem.text!)
+            self.tableView.reloadData()
+        }
+        
+        alert.addAction(action)
+        alert.addTextField { (textField) in
+            textField.placeholder = "Add item here"
+            newItem = textField
+        }
+        
+        self.present(alert, animated: true)
+        
+    }
+    
 
 }
 
